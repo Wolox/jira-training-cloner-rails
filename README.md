@@ -1,0 +1,1 @@
+# jira-training-cloner-rails
