@@ -531,6 +531,7 @@ DEPENDENCIES
   foreman
   formulaic
   health_check (~> 3.0)
+  httparty
   inherited_resources!
   jbuilder (~> 2.5)
   jquery-rails
@@ -580,4 +581,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.16.0
+   2.0.1
