@@ -304,7 +304,7 @@ en:
   application:
     index:
       messages:
-        welcome: Welcome to RailsBootstrap
+        welcome: Welcome to JiraTrainingCloner
     messages:
       alerts:
         user_not_authorized: You are not authorized to carry out this action

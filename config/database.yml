@@ -17,18 +17,18 @@
 development: &default
   adapter: postgresql
   encoding: unicode
-  database: rails-bootstrap_development
+  database: jira_training_cloner_development
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch('DB_USERNAME', 'rails-bootstrap') %>
-  password: <%= ENV.fetch('DB_PASSWORD', 'rails-bootstrap') %>
+  username: <%= ENV.fetch('DB_USERNAME', 'jira_training_cloner') %>
+  password: <%= ENV.fetch('DB_PASSWORD', 'jira_training_cloner') %>
   host: <%= ENV.fetch('DB_HOST', 'localhost') %>
   port: <%= ENV.fetch('DB_PORT', '5432') %>
 
 test: &test
   <<: *default
-  database: rails-bootstrap_test
+  database: jira_training_cloner_test
 
 production:
   adapter: postgresql

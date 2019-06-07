@@ -1,6 +1,6 @@
 config:
   dockerfile: .woloxci/Dockerfile
-  project_name: rails-bootstrap
+  project_name: jira_training_cloner
 
 services:
   - postgres

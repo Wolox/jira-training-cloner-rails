@@ -12,7 +12,7 @@ You need the following files to be able to deploy:
     ```
       [default]
       region = us-east-1
-      [profile rails-bootstrap]
+      [profile jira_training_cloner]
       aws_access_key_id = your-access-key
       aws_secret_access_key = your-secret-access-key
     ```
