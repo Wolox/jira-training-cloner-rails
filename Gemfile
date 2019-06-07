@@ -45,8 +45,7 @@ gem 'active_model_serializers'
 gem 'foreman'
 
 # Active Admin
-gem 'activeadmin', git: 'https://github.com/activeadmin/activeadmin'
-gem 'inherited_resources', git: 'https://github.com/activeadmin/inherited_resources'
+gem 'activeadmin'
 
 # Enables Slim templates
 gem 'slim-rails'
