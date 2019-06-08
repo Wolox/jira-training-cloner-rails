@@ -42,10 +42,9 @@ class Jira
     }
   end
 
-  def self.parse_file(file_name, project_id)
-    file = File.open file_name
-    data = JSON.load file
-    file.close
+  def self.parse_file(file_url, project_id)
+    file = HTTParty.get(file_url)
+    data = JSON.load file.body
     data['cards'].map do |card|
       {
         update: {},

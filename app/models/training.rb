@@ -4,8 +4,8 @@ class Training
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :name, :description, :key, :emails, :filename
-  validates :name, :description, :key, :emails, :filename, presence: true
+  attr_accessor :name, :description, :key, :trainer_email, :trainee_email, :training_url
+  validates :name, :description, :key, :trainer_email, :trainee_email, :training_url, presence: true
   validate :emails_array
 
   def initialize(*args)
@@ -13,8 +13,8 @@ class Training
   end
 
   def create
-    true
-    # call jira api
+    # true
+    Jira.todo({ name: name, description: description, key: key }, training_url, emails_array)
   end
 
   def persisted?
@@ -25,6 +25,6 @@ class Training
 
   def emails_array
     true
-    # validate and replace emails string with array of strings
+    [trainee_email, trainer_email]
   end
 end
