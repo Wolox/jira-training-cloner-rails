@@ -27,6 +27,6 @@ class Training
   end
 
   def emails
-    trainer_email.split(',').map{|email| email.strip }.concat([trainee_email])
+    trainer_email.split(',').map(&:strip).push(trainee_email)
   end
 end
