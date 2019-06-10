@@ -7,7 +7,8 @@ ActiveAdmin.register_page 'Trainings' do
   end
 
   page_action :create, method: :post do
-    args = params.require(:training).permit(:name, :description, :key, :filename, :emails)
+    args = params.require(:training)
+                 .permit(:name, :description, :key, :training_url, :trainer_email, :trainee_email)
     @training = Training.new(*args.to_h)
     if @training.create
       redirect_to admin_dashboard_path,

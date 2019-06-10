@@ -4,17 +4,16 @@ class Training
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :name, :description, :key, :emails, :filename
-  validates :name, :description, :key, :emails, :filename, presence: true
-  validate :emails_array
+  attr_accessor :name, :description, :key, :trainer_email, :trainee_email, :training_url
+  validates :name, :description, :key,
+            :trainer_email, :trainee_email, :training_url, presence: true
 
   def initialize(*args)
     assign_attributes(Hash[args])
   end
 
   def create
-    true
-    # call jira api
+    Jira.training(project, training_url, emails)
   end
 
   def persisted?
@@ -23,8 +22,11 @@ class Training
 
   private
 
-  def emails_array
-    true
-    # validate and replace emails string with array of strings
+  def project
+    { name: name, description: description, key: key }
+  end
+
+  def emails
+    trainer_email.split(',').map(&:strip).push(trainee_email)
   end
 end

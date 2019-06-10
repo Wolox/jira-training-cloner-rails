@@ -4,7 +4,7 @@ class Jira
   headers 'Content-Type' => 'application/json'
   basic_auth Rails.application.secrets.jira[:username], Rails.application.secrets.jira[:password]
 
-  def self.todo(project, file_name, emails)
+  def self.training(project, file_name, emails)
     project_id = create_project(project)
     import_cards(file_name, project_id)
     set_users(emails, project_id)
@@ -42,14 +42,14 @@ class Jira
     }
   end
 
-  def self.parse_file(file_name, project_id)
-    file = File.open file_name
-    data = JSON.load file
-    file.close
+  def self.parse_file(file_url, project_id)
+    file = HTTParty.get(file_url)
+    data = JSON.parse file.body
     data['cards'].map do |card|
       {
         update: {},
-        fields: { project: { id: project_id }, summary: card['name'], description: card['desc'], issuetype: { id: 10_028 } }
+        fields: { project: { id: project_id }, summary: card['name'],
+                  description: card['desc'], issuetype: { id: 10_028 } }
       }
     end
   end

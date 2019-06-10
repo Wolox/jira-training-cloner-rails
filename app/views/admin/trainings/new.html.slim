@@ -1,11 +1,12 @@
 = semantic_form_for @training, url: :admin_trainings_create do |f|
   = f.semantic_errors(*f.object.errors.keys)
   = f.inputs do
-    = f.input :name, required: true
-    = f.input :description, required: true
-    = f.input :key, required: true
-    = f.input :emails, required: true
-    = f.input :filename, required: true
+    = f.input :name, required: true, label: 'Trainee name'
+    = f.input :description, required: true, label: 'Training description'
+    = f.input :key, required: true, label: 'Project key'
+    = f.input :trainer_email, required: true
+    = f.input :trainee_email, required: true
+    = f.input :training_url, required: true, collection: Tech.all, as: :select
   = f.actions do
     = f.action :submit
     = f.action :cancel, wrapper_html: { class: :cancel }
