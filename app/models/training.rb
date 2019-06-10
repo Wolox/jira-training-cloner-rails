@@ -4,9 +4,9 @@ class Training
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :name, :description, :key, :trainer_email, :trainee_email, :training_url
+  attr_accessor :name, :description, :key, :trainer_emails, :trainee_email, :training_url
   validates :name, :description, :key,
-            :trainer_email, :trainee_email, :training_url, presence: true
+            :trainer_emails, :trainee_email, :training_url, presence: true
 
   def initialize(*args)
     assign_attributes(Hash[args])
@@ -27,6 +27,6 @@ class Training
   end
 
   def emails
-    trainer_email.split(',').map(&:strip).push(trainee_email)
+    trainer_emails.split(',').map(&:strip).push(trainee_email)
   end
 end
