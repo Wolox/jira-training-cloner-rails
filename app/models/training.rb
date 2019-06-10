@@ -5,16 +5,15 @@ class Training
   extend ActiveModel::Naming
 
   attr_accessor :name, :description, :key, :trainer_email, :trainee_email, :training_url
-  validates :name, :description, :key, :trainer_email, :trainee_email, :training_url, presence: true
-  validate :emails_array
+  validates :name, :description, :key,
+            :trainer_email, :trainee_email, :training_url, presence: true
 
   def initialize(*args)
     assign_attributes(Hash[args])
   end
 
   def create
-    # true
-    Jira.todo({ name: name, description: description, key: key }, training_url, emails_array)
+    Jira.training(project, training_url, emails)
   end
 
   def persisted?
@@ -23,8 +22,11 @@ class Training
 
   private
 
-  def emails_array
-    true
+  def project
+    { name: name, description: description, key: key }
+  end
+
+  def emails
     [trainee_email, trainer_email]
   end
 end

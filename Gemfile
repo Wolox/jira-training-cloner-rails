@@ -46,6 +46,7 @@ gem 'foreman'
 
 # Active Admin
 gem 'activeadmin'
+gem 'activeadmin_addons'
 
 # Enables Slim templates
 gem 'slim-rails'

@@ -2,11 +2,11 @@
   = f.semantic_errors(*f.object.errors.keys)
   = f.inputs do
     = f.input :name, required: true, label: 'Trainee name'
-    = f.input :description, required: true, label: 'Training Description'
+    = f.input :description, required: true, label: 'Training description'
     = f.input :key, required: true, label: 'Project key'
-    = f.input :trainer_email, required: true, label: 'Trainer Email'
-    = f.input :trainee_email, required: true, label: 'Trainee Email'
-    = f.input :training_url, required: true, :as => :select, :collection => Tech.all.map{ |tech| [tech.name,tech.url]}
+    = f.input :trainer_email, required: true
+    = f.input :trainee_email, required: true
+    = f.input :training_url, required: true, collection: Tech.all, as: :select
   = f.actions do
     = f.action :submit
     = f.action :cancel, wrapper_html: { class: :cancel }
