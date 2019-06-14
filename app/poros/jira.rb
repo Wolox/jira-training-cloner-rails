@@ -4,9 +4,10 @@ class Jira
   headers 'Content-Type' => 'application/json'
   basic_auth Rails.application.secrets.jira[:username], Rails.application.secrets.jira[:password]
 
-  def self.training(project, file_name, emails)
+  def self.training(project, training, emails)
+    tech = Tech.find(training)
     project_id = create_project(project)
-    import_cards(file_name, project_id)
+    import_cards(tech.url, project_id)
     set_users(emails, project_id)
   end
 

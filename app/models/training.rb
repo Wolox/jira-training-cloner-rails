@@ -4,16 +4,16 @@ class Training
   include ActiveModel::Conversion
   extend ActiveModel::Naming
 
-  attr_accessor :name, :description, :key, :trainer_email, :trainee_email, :training_url
+  attr_accessor :name, :description, :key, :trainer_email, :trainee_email, :training
   validates :name, :description, :key,
-            :trainer_email, :trainee_email, :training_url, presence: true
+            :trainer_email, :trainee_email, :training, presence: true
 
   def initialize(*args)
     assign_attributes(Hash[args])
   end
 
   def create
-    Jira.training(project, training_url, emails)
+    Jira.training(project, training, emails)
   end
 
   def persisted?

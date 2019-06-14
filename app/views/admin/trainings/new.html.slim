@@ -6,7 +6,7 @@
     = f.input :key, required: true, label: 'Project key'
     = f.input :trainer_email, required: true
     = f.input :trainee_email, required: true
-    = f.input :training_url, required: true, collection: Tech.all.map{|tech| [tech.name, tech.url]}, as: :select, label: 'Tech'
+    = f.input :training, required: true, collection: Tech.all, as: :select, label: 'Tech'
   = f.actions do
     = f.action :submit
     = f.action :cancel, wrapper_html: { class: :cancel }
