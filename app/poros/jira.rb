@@ -17,7 +17,7 @@ class Jira
   end
 
     def self.import_cards(file_name, project_id)
-      res = post('https://wolox-support.atlassian.net/rest/api/2/issue/bulk',
+      post('https://wolox-support.atlassian.net/rest/api/2/issue/bulk',
         body: { issueUpdates: parse_file(file_name, project_id) }.to_json)
     end
 
