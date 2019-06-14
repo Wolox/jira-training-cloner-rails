@@ -4,7 +4,7 @@
     = f.input :name, required: true, label: 'Trainee name'
     = f.input :description, required: true, label: 'Training description'
     = f.input :key, required: true, label: 'Project key'
-    = f.input :trainer_email, required: true
+    = f.input :trainer_emails, required: true, as: :tags, collection: Trainer.all.pluck(:email)
     = f.input :trainee_email, required: true
     = f.input :training, required: true, collection: Tech.all, as: :select, label: 'Tech'
   = f.actions do
