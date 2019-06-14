@@ -4,10 +4,10 @@ class Jira
   headers 'Content-Type' => 'application/json'
   basic_auth Rails.application.secrets.jira[:username], Rails.application.secrets.jira[:password]
 
-  def self.training(project, file_name, emails)
+  def self.training(project, file_name, trainers, trainee)
     project_id = create_project(project)
     import_cards(file_name, project_id)
-    set_users(emails, project_id)
+    set_users(trainers, trainee, project_id)
   end
 
   def self.create_project(body)
@@ -21,9 +21,10 @@ class Jira
          body: { issueUpdates: parse_file(file_name, project_id) }.to_json)
   end
 
-  def self.set_users(emails, project_id)
+  def self.set_users(trainers, trainee, project_id)
+    account_ids = trainers.map(&:jira_id).push(user_account_id(trainee))
     post("https://wolox-support.atlassian.net/rest/api/3/project/#{project_id}/role/10102",
-         body: { user: emails.map(&method(:user_account_id)) }.to_json)
+         body: { user: account_ids }.to_json)
   end
 
   def self.user_account_id(email)

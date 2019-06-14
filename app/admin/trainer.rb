@@ -1,10 +1,9 @@
 ActiveAdmin.register Trainer do
-  permit_params :name, :email
+  permit_params :email
 
   index do
     selectable_column
     id_column
-    column :name
     column :email
     actions
   end
@@ -13,7 +12,6 @@ ActiveAdmin.register Trainer do
 
   form do |f|
     f.inputs do
-      f.input :name
       f.input :email
     end
     f.actions
