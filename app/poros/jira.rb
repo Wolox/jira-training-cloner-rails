@@ -16,10 +16,10 @@ class Jira
     JSON.parse(res.body)['id']
   end
 
-  def self.import_cards(file_name, project_id)
-    post('https://wolox-support.atlassian.net/rest/api/2/issue/bulk',
-         body: { issueUpdates: parse_file(file_name, project_id) }.to_json)
-  end
+    def self.import_cards(file_name, project_id)
+      res = post('https://wolox-support.atlassian.net/rest/api/2/issue/bulk',
+        body: { issueUpdates: parse_file(file_name, project_id) }.to_json)
+    end
 
   def self.set_users(emails, project_id)
     post("https://wolox-support.atlassian.net/rest/api/3/project/#{project_id}/role/10102",
