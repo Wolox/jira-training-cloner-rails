@@ -1,32 +1,17 @@
-class Training
-  include ActiveModel::AttributeAssignment
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
+class Training < ApplicationRecord
+  belongs_to :tech
+  has_and_belongs_to_many :trainers
 
-  attr_accessor :name, :description, :key, :trainer_emails, :trainee_email, :training_url
-  validates :name, :description, :key,
-            :trainer_emails, :trainee_email, :training_url, presence: true
-
-  def initialize(*args)
-    assign_attributes(Hash[args])
-  end
-
-  def create
-    Jira.training(project, training_url, emails)
-  end
-
-  def persisted?
-    false
-  end
+  before_create :jira_project
+  validates :name, :description, :key, :tech_id, :trainee, presence: true
 
   private
 
-  def project
-    { name: name, description: description, key: key }
+  def jira_project
+    Jira.training(project, tech.url, trainers, trainee)
   end
 
-  def emails
-    trainer_emails.split(',').map(&:strip).push(trainee_email)
+  def project
+    { name: name, description: description, key: key }
   end
 end

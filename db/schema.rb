@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190610203244) do
+ActiveRecord::Schema.define(version: 20190614222234) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,24 @@ ActiveRecord::Schema.define(version: 20190610203244) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "jira_id"
   end
 
+  create_table "trainers_trainings", id: false, force: :cascade do |t|
+    t.bigint "training_id", null: false
+    t.bigint "trainer_id", null: false
+  end
+
+  create_table "trainings", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.string "key"
+    t.string "trainee"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "tech_id"
+    t.index ["tech_id"], name: "index_trainings_on_tech_id"
+  end
+
+  add_foreign_key "trainings", "teches"
 end
