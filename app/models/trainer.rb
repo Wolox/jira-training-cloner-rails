@@ -4,6 +4,7 @@ class Trainer < ApplicationRecord
   has_many :teches, :through => :trainer_teches
 
   validates :email, presence: true
+  validates :name, presence: true
 
   before_create :sync_jira_id
 
