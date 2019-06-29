@@ -1,9 +1,17 @@
 class Trainer < ApplicationRecord
   has_and_belongs_to_many :trainings
+  has_many :trainer_teches
+  has_many :teches, :through => :trainer_teches
 
   validates :email, presence: true
 
   before_create :sync_jira_id
+
+  accepts_nested_attributes_for :trainer_teches, :teches
+
+  def active?
+    trainer_teches.any?(&:active)
+  end
 
   private
 

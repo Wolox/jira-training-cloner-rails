@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190614222234) do
+ActiveRecord::Schema.define(version: 20190628205510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,17 @@ ActiveRecord::Schema.define(version: 20190614222234) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "trainer_teches", force: :cascade do |t|
+    t.bigint "trainer_id"
+    t.bigint "tech_id"
+    t.boolean "active"
+    t.boolean "trainer_to_be"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tech_id"], name: "index_trainer_teches_on_tech_id"
+    t.index ["trainer_id"], name: "index_trainer_teches_on_trainer_id"
   end
 
   create_table "trainers", force: :cascade do |t|
