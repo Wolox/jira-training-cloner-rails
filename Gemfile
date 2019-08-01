@@ -44,6 +44,8 @@ gem 'active_model_serializers'
 
 gem 'foreman'
 
+gem "github_api"
+
 # Active Admin
 gem 'activeadmin'
 gem 'activeadmin_addons'
