@@ -16,8 +16,8 @@ ActiveAdmin.register Trainer do
 
   form do |f|
     f.inputs do
-      f.input :email
       f.input :name
+      f.input :email
       f.has_many :trainer_teches, allow_destroy: true do |tt| # TODO: change label
         tt.input :tech, as: :select, collection: Tech.all # TODO: change label
         tt.input :active, as: :boolean

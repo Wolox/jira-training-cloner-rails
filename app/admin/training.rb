@@ -4,7 +4,10 @@ ActiveAdmin.register Training do
     selectable_column
     id_column
     column :name
-    column :key
+    column :link { |training| link_to('Jira', "https://wolox-support.atlassian.net/browse/#{training.key}") }
+    column :tech {|training| training.tech.name}
+    column :trainee
+    column :created_at
     actions
   end
 
