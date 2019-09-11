@@ -46,7 +46,7 @@ class Jira
   def self.parse_file(file_url, project_id)
     file = HTTParty.get(file_url)
     data = JSON.parse(file.body)
-    cards = data.length ? data : data['cards']
+    cards = data.is_a?(Array) ? data : data['cards']
     cards.map do |card|
       {
         update: {},
